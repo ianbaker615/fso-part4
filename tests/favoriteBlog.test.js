@@ -1,6 +1,6 @@
 const listHelper = require("../utils/list_helper");
 
-describe("total likes", () => {
+describe("favorite blog", () => {
   const listWithOneBlog = [
     {
       _id: "5a422aa71b54a676234d17f8",
@@ -11,7 +11,6 @@ describe("total likes", () => {
       __v: 0,
     },
   ];
-
   const blogs = [
     {
       _id: "5a422a851b54a676234d17f7",
@@ -63,19 +62,27 @@ describe("total likes", () => {
     },
   ];
 
-  test("of empty list is zero", () => {
+  test("of empty list is null", () => {
     const blogs = [];
-    const result = listHelper.totalLikes(blogs);
-    expect(result).toBe(0);
+    const result = listHelper.favoriteBlog(blogs);
+    expect(result).toBe(null);
   });
 
   test("when list has only one blog returns likes of that blog", () => {
-    const result = listHelper.totalLikes(listWithOneBlog);
-    expect(result).toBe(5);
+    const result = listHelper.favoriteBlog(listWithOneBlog);
+    expect(result).toEqual({
+      title: "Go To Statement Considered Harmful",
+      author: "Edsger W. Dijkstra",
+      likes: 5,
+    });
   });
 
   test("of list length > 1 returns correct sum of all likes", () => {
-    const result = listHelper.totalLikes(blogs);
-    expect(result).toBe(36); // could have messed up my addition
+    const result = listHelper.favoriteBlog(blogs);
+    expect(result).toEqual({
+      title: "Canonical string reduction",
+      author: "Edsger W. Dijkstra",
+      likes: 12,
+    });
   });
 });
