@@ -32,8 +32,28 @@ const favoriteBlog = (blogs) => {
   };
 };
 
+const mostBlogs = (blogs) => {
+  if (blogs.length === 0) return null;
+  // iterate through blogs and find author whose name appears the most times
+  const authorCount = blogs.reduce((obj, currentBlog) => {
+    // increment or set the property
+    // return property value if defined
+    // zero if not defined
+    obj[currentBlog.author] = (obj[currentBlog.author] || 0) + 1;
+    // return update object
+    return obj;
+    // initial value of accumulator is empty object
+  }, {});
+  console.log("authorCount:", authorCount);
+  return {
+    author: Object.keys(authorCount),
+    blogs: Object.values(authorCount),
+  };
+};
+
 module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
+  mostBlogs,
 };
